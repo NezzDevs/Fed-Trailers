@@ -103,7 +103,7 @@ app.get('/health', (req, res) => {
 
 app.get('/', (req, res) => {
   res.json({
-    name: 'TMDB Trailer API',
+    name: 'Fed Trailer API',
     endpoints: ['/movie/:id', '/tv/:id', '/health']
   });
 });
