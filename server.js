@@ -15,15 +15,7 @@ app.get('/movie/:id', async (req, res) => {
   try {
     const { id } = req.params;
     
-    const [movieResponse, videosResponse] = await Promise.all([
-      axios.get(`${TMDB_BASE_URL}/movie/${id}`, {
-        params: { api_key: TMDB_API_KEY }
-      }),
-      axios.get(`${TMDB_BASE_URL}/movie/${id}/videos`, {
-        params: { api_key: TMDB_API_KEY }
-      })
-    ]);
-
+    const videosResponse = await axios.get(`${TMDB_BASE_URL}/movie/${id}/videos?api_key=${TMDB_API_KEY}`);
     const videos = videosResponse.data.results;
 
     const trailers = videos.filter(video => 
@@ -52,15 +44,12 @@ app.get('/movie/:id', async (req, res) => {
     });
 
   } catch (error) {
-    console.error('Error fetching movie trailer:', error.message);
-    
     if (error.response?.status === 404) {
       return res.status(404).json({ error: 'Movie not found' });
     }
     
     res.status(500).json({ 
-      error: 'Failed to fetch trailer data',
-      details: error.message 
+      error: 'Failed to fetch trailer data'
     });
   }
 });
@@ -69,15 +58,7 @@ app.get('/tv/:id', async (req, res) => {
   try {
     const { id } = req.params;
     
-    const [tvResponse, videosResponse] = await Promise.all([
-      axios.get(`${TMDB_BASE_URL}/tv/${id}`, {
-        params: { api_key: TMDB_API_KEY }
-      }),
-      axios.get(`${TMDB_BASE_URL}/tv/${id}/videos`, {
-        params: { api_key: TMDB_API_KEY }
-      })
-    ]);
-
+    const videosResponse = await axios.get(`${TMDB_BASE_URL}/tv/${id}/videos?api_key=${TMDB_API_KEY}`);
     const videos = videosResponse.data.results;
 
     const trailers = videos.filter(video => 
@@ -106,37 +87,27 @@ app.get('/tv/:id', async (req, res) => {
     });
 
   } catch (error) {
-    console.error('Error fetching TV show trailer:', error.message);
-    
     if (error.response?.status === 404) {
       return res.status(404).json({ error: 'TV show not found' });
     }
     
     res.status(500).json({ 
-      error: 'Failed to fetch trailer data',
-      details: error.message 
+      error: 'Failed to fetch trailer data'
     });
   }
 });
 
 app.get('/health', (req, res) => {
-  res.json({ status: 'OK', timestamp: new Date().toISOString() });
+  res.json({ status: 'OK' });
 });
 
 app.get('/', (req, res) => {
   res.json({
-    name: 'Fed Trailer API',
-    version: '1.0.0',
-    endpoints: {
-      'GET /movie/:id': 'Get trailer for a movie by TMDB ID',
-      'GET /tv/:id': 'Get trailer for a TV show by TMDB ID',
-      'GET /health': 'Health check'
-    }
+    name: 'TMDB Trailer API',
+    endpoints: ['/movie/:id', '/tv/:id', '/health']
   });
 });
 
 app.listen(PORT, () => {
-  console.log(`Fed Trailer API running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
-
-module.exports = app;
