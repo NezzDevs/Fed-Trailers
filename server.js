@@ -39,7 +39,7 @@ app.get('/movie/:id', async (req, res) => {
 
     res.json({
       trailer: {
-        embed_url: `https://www.youtube.com/embed/${primaryTrailer.key}`
+        embed_url: `https://www.youtube.com/embed/${primaryTrailer.key}?autoplay=1&mute=1`
       }
     });
 
@@ -82,7 +82,7 @@ app.get('/tv/:id', async (req, res) => {
 
     res.json({
       trailer: {
-        embed_url: `https://www.youtube.com/embed/${primaryTrailer.key}`
+        embed_url: `https://www.youtube.com/embed/${primaryTrailer.key}?autoplay=1&mute=1`
       }
     });
 
