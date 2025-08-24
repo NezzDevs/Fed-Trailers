@@ -5,4 +5,4 @@ builder = "nixpacks"
 startCommand = "npm start"
 healthcheckPath = "/health"
 healthcheckTimeout = 300
-restartPolicyType = "on-failure
+restartPolicyType = "on-failure"
