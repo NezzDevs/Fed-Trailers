@@ -39,7 +39,7 @@ app.get('/movie/:id', async (req, res) => {
 
     res.json({
       trailer: {
-        embed_url: `https://www.youtube.com/embed/${primaryTrailer.key}?autoplay=1&mute=1&modestbranding=1&rel=0&controls=0&disablekb=1&iv_load_policy=3&loop=1&playlist=${primaryTrailer.key}&cc_load_policy=0`
+        embed_url: `https://www.youtube.com/embed/${primaryTrailer.key}?autoplay=1&mute=1&controls=0&disablekb=1&loop=1&playlist=${primaryTrailer.key}&cc_load_policy=0`
       }
     });
 
@@ -82,7 +82,7 @@ app.get('/tv/:id', async (req, res) => {
 
     res.json({
       trailer: {
-        embed_url: `https://www.youtube.com/embed/${primaryTrailer.key}?autoplay=1&mute=1&modestbranding=1&rel=0&controls=0&disablekb=1&iv_load_policy=3&loop=1&playlist=${primaryTrailer.key}&cc_load_policy=0`
+        embed_url: `https://www.youtube.com/embed/${primaryTrailer.key}?autoplay=1&mute=1&controls=0&disablekb=1&loop=1&playlist=${primaryTrailer.key}&cc_load_policy=0`
       }
     });
 
